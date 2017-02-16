@@ -18,11 +18,9 @@ case ${1} in
         if test `pwd | grep -c ${tabword}` -gt 0
         then
             # pwd contain ${tabword}, remove it.
-            echo "tab to gnu-opt-mpi"
             dir=`pwd | sed "s:${tabword}::g"`
             cd ${dir}
         else
-            echo "tab to amroc"
             dir=`pwd | sed "s:vtf/:vtf/${tabword}:g"`
             cd ${dir}
         fi
