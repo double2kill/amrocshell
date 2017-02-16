@@ -1,0 +1,46 @@
+#!/bin/bash
+
+#初始化
+
+#定义函数
+usage(){
+	echo "usage: amroc [-h|--help] | [-source|-s] | [-cdgnuapp|-cg] | [-rmgnu|-rg] | [-cphdf|-cp] "
+}
+
+#main,从这里开始主程序
+case ${1} in
+	-h|--help)
+		usage
+		;;
+	tab) 
+		echo "tab workdir to amroc"
+		tabword='gnu-opt-mpi'
+		if `pwd | grep ${tabword}`
+		then echo yes
+		else echo no
+		fi
+		;;
+	tab) 
+		echo "cd application"
+		cd ~/vtf/gnu-opt-mpi/amroc/clawpack/applications
+		;;
+	-rmgnu|-rg) 
+		echo "shift working dir"
+		rmword='gnu-opt-mpi'
+		dir=`pwd | sed "s/${rmword}\///g"`
+		cd ${dir}
+		;;
+	-cphdf|-cp)
+		echo "cp"
+		cp ~/display_file_visit.in ./
+		;;
+	"")  
+		echo "please input your params to amroc"
+		echo "try 'amroc --help'"
+		;;
+	*) 
+		echo "Unknown opition: ${1}"
+		usage
+		;;
+esac
+

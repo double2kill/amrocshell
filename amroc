@@ -1,0 +1,53 @@
+#!/bin/bash
+
+#初始化
+vtfhome=`echo ${BLD_ROOT}/../`
+
+#定义函数
+usage(){
+    echo "usage: amroc [-h|--help] | [-source|-s] | [-cdgnuapp|-cg] | [-rmgnu|-rg] | [-cphdf|-cp] "
+}
+
+#main,从这里开始主程序
+case ${1} in
+    -h|--help)
+        usage
+        ;;
+    tab) 
+        tabword='gnu-opt-mpi/'
+        if test `pwd | grep -c ${tabword}` -gt 0
+        then
+            # pwd contain ${tabword}, remove it.
+            echo "tab to gnu-opt-mpi"
+            dir=`pwd | sed "s:${tabword}::g"`
+            cd ${dir}
+        else
+            echo "tab to amroc"
+            dir=`pwd | sed "s:vtf/:vtf/${tabword}:g"`
+            cd ${dir}
+        fi
+        ;;
+    cd) 
+        case ${2} in
+            ""|vtf)
+                cd ${vtfhome}
+                ;;
+            *)
+                echo "wrong"
+                ;;
+        esac
+        ;;
+    make) 
+        currentDir=`pwd`
+        echo "comming soon"
+        ;;
+    "")  
+        echo "please input your params to amroc"
+        echo "try 'amroc --help'"
+        ;;
+    *) 
+        echo "Unknown opition: ${1}"
+        usage
+        ;;
+esac
+
